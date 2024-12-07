@@ -1,4 +1,5 @@
 import copy
+import time
 
 #filename = 'sample.txt'
 filename = 'input.txt'
@@ -88,6 +89,8 @@ def step(m):
 
 if __name__ == "__main__" :
 
+    starttime = time.time()
+
     with open(filename,'r') as f:
         lines = f.readlines()
         for l in lines:        
@@ -102,6 +105,11 @@ if __name__ == "__main__" :
     direction = map[y][x]
     count = 0
 
+    # init direction maps
+    directionmap=[]
+    for n in range(0,h):
+        directionmap.append([0 for c in range(0,w)])
+            
     for cy in range(0,h):
         for cx in range(0,w):
             testmap = copy.deepcopy(map)
@@ -111,9 +119,6 @@ if __name__ == "__main__" :
             obj = testmap[cy][cx]             
             if  obj == '.':
                 testmap[cy][cx] = '#'
-                directionmap=[]
-                for n in range(0,h):
-                    directionmap.append([0 for c in range(0,w)])
                 upmap=copy.deepcopy(directionmap)
                 downmap=copy.deepcopy(directionmap)
                 rightmap=copy.deepcopy(directionmap)
@@ -125,13 +130,17 @@ if __name__ == "__main__" :
                 stepcount = 0
                 loopfound = False
                 while step(testmap) and stepcount < w*h :                                  
-                    pass
-                #if stepcount >= w*h or loopfound:
-                #    printmap(testmap,True)
+                    pass                
             else:
                 print (f"field at ({cx},{cy}) already occupied with {obj}")
             testmap = None
+            upmap = None
+            downmap = None
+            rightmap = None
+            leftmap = None
     
+    executiontime = time.time() - starttime;
+    print(f"Execution time: {executiontime}")    
     print(f"# Position for obstacleas which causes a loop: {poscount}")    
         
 
