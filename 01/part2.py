@@ -1,9 +1,9 @@
 list1 = []
 list2 = []
-filename='input.txt'
-with open(filename,'r') as f:
+filename = "input.txt"
+with open(filename, "r") as f:
     for line in f:
-        [ n1, n2 ] = line.split()
+        [n1, n2] = line.split()
         list1.append(n1)
         list2.append(n2)
 
@@ -19,10 +19,8 @@ total = 0
 for e in list1:
     e1 = list1[index]
     n = list2.count(e1)
-    d = int(e1)*n
-    total = total + d    
-    index = index + 1 
+    d = int(e1) * n
+    total = total + d
+    index = index + 1
 
 print(f"TOTAL: {total}")
-    
-

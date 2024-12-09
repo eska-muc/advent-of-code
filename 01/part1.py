@@ -1,8 +1,8 @@
 list1 = []
 list2 = []
-with open('input.txt','r') as f:
+with open("input.txt", "r") as f:
     for line in f:
-        [ n1, n2 ] = line.split()
+        [n1, n2] = line.split()
         list1.append(n1)
         list2.append(n2)
 
@@ -18,10 +18,8 @@ total = 0
 for e in list1:
     e1 = int(list1[index])
     e2 = int(list2[index])
-    d = abs(e2-e1)
-    total = total + d    
-    index = index + 1 
+    d = abs(e2 - e1)
+    total = total + d
+    index = index + 1
 
 print(f"TOTAL: {total}")
-    
-

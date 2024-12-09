@@ -1,7 +1,7 @@
 import re
 
-#filename = 'sample.txt'
-filename = 'input.txt'
+# filename = 'sample.txt'
+filename = "input.txt"
 
 rulere = re.compile("^([0-9]+)\|([0-9]+)")
 pagesre = re.compile("^([0-9]+),([0-9]+)*")
@@ -12,7 +12,8 @@ pages = []
 rulecount = 0
 pagelistcount = 0
 
-def checkorder(rule,pagelist):
+
+def checkorder(rule, pagelist):
     start = rule["start"]
     end = rule["end"]
     if start in pagelist and end in pagelist:
@@ -20,23 +21,25 @@ def checkorder(rule,pagelist):
             return False
     return True
 
-def checklist(rules,pagelist):
+
+def checklist(rules, pagelist):
     for rule in rules:
-        if checkorder(rule,pagelist) == False:
+        if checkorder(rule, pagelist) == False:
             return False
     return True
+
 
 def summiddlenumbers(correctlists):
     sum = 0
     for list in correctlists:
-        midindex = int(len(list)/2)
+        midindex = int(len(list) / 2)
         midval = list[midindex]
         print(f"value at {midindex} of {list}: {midval}")
         sum = sum + int(midval)
     return sum
 
 
-with open(filename,'r') as f:
+with open(filename, "r") as f:
     lines = f.readlines()
     for l in lines:
         line = l.rstrip()
@@ -45,11 +48,11 @@ with open(filename,'r') as f:
         if rulematch:
             rulecount = rulecount + 1
             rule = {}
-            (rule["start"],rule["end"]) = rulematch.groups()
-            rules.append(rule)                        
+            (rule["start"], rule["end"]) = rulematch.groups()
+            rules.append(rule)
         if pagesmatch:
             pagelistcount = pagelistcount + 1
-            pagelist = line.split(',')
+            pagelist = line.split(",")
             pages.append(pagelist)
 
 print(f"{rulecount} rules: {rules}")
@@ -57,10 +60,9 @@ print(f"{pagelistcount} pagelists: {pages}")
 
 correctlists = []
 for pagelist in pages:
-    if checklist(rules,pagelist):
+    if checklist(rules, pagelist):
         correctlists.append(pagelist)
-            
+
 print(f"correct lists: {correctlists}")
 result = summiddlenumbers(correctlists)
 print(f"RESULT: {result}")
-
